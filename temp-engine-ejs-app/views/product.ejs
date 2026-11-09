@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <h1>Products CRUD</h1>
+
+    <a href="/product-form">Add a New Product</a>
+    <br><br>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <% products.forEach(product => { %>
+            <div style="
+                border: 1px solid black;
+                padding: 10px;
+                margin: 10px;
+                width: 220px;
+                border-radius: 5px;
+            ">
+                <p>Product Name: <%= product.name %></p>
+                <p>Product Category: <%= product.category %></p>
+                <p>Product Price: Rs. <%= product.price %></p>
+
+                <a href="/product/<%= product._id %>">View</a> |
+                <a href="/product-form/<%= product._id %>">Edit</a> |
+                <a href="/delete-product/<%= product._id %>"
+                   onclick="return confirm('Delete this product?')">
+                    Delete
+                </a>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
