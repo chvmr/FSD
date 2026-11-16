@@ -71,3 +71,6 @@ if (studentDeleteIndex !== -1) {
 }
 
 console.log("Students after CRUD:", students);
+server.listen(4000, () => {
+    console.log("Server running at http://localhost:4000");
+});
