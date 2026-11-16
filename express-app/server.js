@@ -1,9 +1,7 @@
 import express from 'express';
 const app = express();
 app.use(express.json());
-app.get("/", (req, res) => {
-    res.send("Express CRUD API is running successfully!");
-});
+
 const products = [];
 //CRUD
 //create a new product http://localhost:4000/products payload:{id:1, name: "laptop", price:50000}
@@ -58,8 +56,6 @@ app.delete("/products/:id", (req,res) => {
         res.status(404).json({message: "Product not found"});
     }
 });
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(4000, () => {
+    console.log("Server running at http://localhost:4000/products");
 });
