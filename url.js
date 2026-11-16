@@ -1,14 +1,33 @@
-import {URL} from "url";
-const u=new URL (
-    'https://www.example.com:8080/'+
-    'products/list?category=books'+
-    '&sort=asc#section2'
-);
-console.log(u.protocol);
-console.log(u.hostname);
-console.log(u.port);
-console.log(u.pathname);
-console.log(u.hash);
-u.searchParams.forEach((v,k) => {
-    console.log(k,'=',v);
+
+import { URL } from "url";
+import http from "http";
+
+const server = http.createServer((req, res) => {
+    const u = new URL(
+        'https://www.example.com:8080/' +
+        'products/list?category=books' +
+        '&sort=asc#section2'
+    );
+
+    res.writeHead(200, { "Content-Type": "text/html" });
+
+    let output = `
+        Protocol: ${u.protocol}<br>
+        Hostname: ${u.hostname}<br>
+        Port: ${u.port}<br>
+        Pathname: ${u.pathname}<br>
+        Hash: ${u.hash}<br>
+    `;
+
+    u.searchParams.forEach((v, k) => {
+        output += `${k} = ${v}<br>`;
+    });
+
+    res.end(output);
+});
+
+const PORT = process.env.PORT || 8080;
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
